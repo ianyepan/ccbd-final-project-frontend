@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './SearchResult.module.css';
 import { BusinessRating } from '../../../BusinessRating/BusinessRating';
+import {MyHeart} from '../../../FavoriteList/Heart';
 
 export function SearchResult(props) {
     const b = props.business;
@@ -9,7 +10,7 @@ export function SearchResult(props) {
     }
 
     const tags = b.categories.map(category => (<span className={`tag ${styles['business-tag']}`} key={b.id + category.title}>{category.title}</span>));
-    const addressLines = b.location.display_address.map(addressLine => <p key={b.id + addressLine}>{addressLine}</p>);
+    const addressLines = b.address;
 
     return (
         <div className={styles['search-result']}>
@@ -20,8 +21,12 @@ export function SearchResult(props) {
                 <p>{b.price} {tags}</p>
             </div>
             <div className={styles['contact-info']}>
-                <p>{b.phone}</p>
+                {/* <p>{b.phone}</p> */}
                 {addressLines}
+            </div>
+            <br/>
+            <div>
+              <MyHeart/>
             </div>
         </div>
     )

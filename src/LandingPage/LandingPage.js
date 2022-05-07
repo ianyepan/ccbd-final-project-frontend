@@ -1,29 +1,41 @@
 import React from 'react';
+import { useMemo } from 'react'
 import { TopNav } from './TopNav/TopNav';
 import logo from '../assets/logo.png';
 import styles from './LandingPage.module.css';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { SearchSuggestions } from './SearchSuggestions/SearchSuggestions';
 import useReactRouter from 'use-react-router';
+import queryString from 'query-string';
+import { get_access_token } from '../hooks/yelp-api/api'; 
 
 export function LandingPage() {
-  const { history } = useReactRouter();
+  const { location, history } = useReactRouter();
 
-  function search(term, location) {
-    const urlEncodedTerm = encodeURI(term);
-    const urlEncodedLocation = encodeURI(location);
-    history.push(
-      `/search?find_desc=${urlEncodedTerm}&find_loc=${urlEncodedLocation}`
-    );
+  function search(price_level, cuisine, rating) {
+    const encodedPriceLevel = encodeURI(price_level);
+    const encodedCusine = encodeURI(cuisine);
+    const encodedRating = encodeURI(rating);
+    history.push(`/search?price_level=${encodedPriceLevel}&cuisine=${encodedCusine}&rating=${encodedRating}`);
   }
+
+  // Acts as componentWillMount
+  useMemo(async () => {
+    const urlParams = new URLSearchParams(window.location.search); // E.g. http://localhost:8888/?code=b0b7bc4b-31a9-4b93-b34c-d33f359acf30
+    const code = urlParams.get('code'); // E.g. b0b7bc4b-31a9-4b93-b34c-d33f359acf30 (until string end)
+    // exchange authorization token for access_token
+    let resp = await get_access_token(code); 
+    localStorage.setItem('access_token', resp.access_token);
+    localStorage.setItem('refresh_token', resp.refresh_token);
+  });
+
 
   return (
     <div className={styles.landing}>
       <div className={styles['search-area']}>
-        <TopNav />
+        <TopNav/>
         <img src={logo} className={styles.logo} alt="logo" />
         <SearchBar search={search} />
-        <SearchSuggestions />
       </div>
     </div>
   );

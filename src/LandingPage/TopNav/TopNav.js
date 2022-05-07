@@ -1,5 +1,30 @@
 import React from 'react';
 import styles from './TopNav.module.css';
+import { withRouter } from 'react-router-dom'
+
+const handleLogin = () => {
+
+};
+
+const LoginButton = withRouter(({ history }) => (
+  <button
+    type='button'
+    className='button'
+    onClick={() => { history.push('/login') }}
+  >
+    Login
+  </button>
+))
+
+const SignUpButton = withRouter(({ history }) => (
+  <button
+    type='button'
+    className='button'
+    onClick={() => { history.push('/signup') }}
+  >
+    Sign Up
+  </button>
+))
 
 export function TopNav() {
     return (
@@ -9,8 +34,8 @@ export function TopNav() {
                 <span>Events</span>
             </div>
             <div className={styles.right}>
-                <span>Login</span>
-                <button className='button'>Sign up</button>
+                <LoginButton />
+                <SignUpButton />
             </div>
         </div>
     );
