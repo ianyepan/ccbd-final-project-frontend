@@ -25,13 +25,40 @@ export function SearchResults(props) {
         fetchRIDs();
     }, []);
 
-    if (props.restaurants && props.restaurants.length) {
+    console.log("restaurants: ", props.restaurants);
+
+    if (props.restaurants)
+        console.log("restaurants length: ", props.restaurants.length);
+
+    // if (props.restaurants && props.restaurants.length) {
+    //     searchResults = props.restaurants.map(b => <SearchResult key={b.id} business={b} is_in_favorite_list={rids.includes(b.rid)} />);
+    //     return (
+    //         <div className={styles['search-results']}>
+    //             {searchResults}
+    //         </div>
+    //     );
+    // } else {
+    //     return <EmptyResults />
+    // }
+
+    if (props.restaurants) {
         searchResults = props.restaurants.map(b => <SearchResult key={b.id} business={b} is_in_favorite_list={rids.includes(b.rid)} />);
     }
-
     return (
         <div className={styles['search-results']}>
             {searchResults}
         </div>
     );
+
 }
+
+
+const EmptyResults = () => {
+    return (
+        <div style={{"text-align": "center"}}>
+            <h1>
+                This favorite list is empty.
+            </h1>
+        </div>
+    );
+};

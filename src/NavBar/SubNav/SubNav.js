@@ -2,7 +2,7 @@ import React from 'react';
 import { SubNavItem } from './SubNavItem/SubNavItem';
 import styles from './SubNav.module.css';
 
-export function SubNav() {
+export function SubNav(props) {
     return (
         <div className={styles.container}>
             <div className={styles['sub-nav']}>
@@ -10,7 +10,7 @@ export function SubNav() {
                     {/* <SubNavItem label='Restaurant' icon='fa-utensils'/>
                     <SubNavItem label='Home Services' icon='fa-home'/>
                     <SubNavItem label='Auto Services' icon='fa-car-side'/> */}
-                    <SubNavItem label='My Saved Favorite Lists' icon='fa-info-circle' showRightBorder/>
+                    <SubNavItem setRestaurants={props.setRestaurants} label='My Saved Favorite Lists' icon='fa-info-circle' showRightBorder/>
                 </div>
                 <div>
                     <button className={`button ${styles['subnav-button']} ${styles['omit-right-border']}`}>

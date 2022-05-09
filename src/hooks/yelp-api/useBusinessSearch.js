@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import * as api from './api';
 
 export function useBusinessSearch(price_level, cuisine, rating) {
-    const [restaurants, setRestaurants] = useState([]);
+    const [restaurants, setRestaurants] = useState();
     const [amountResults, setAmountResults] = useState();
     const [searchParams, setSearchParams] = useState({price_level, cuisine, rating});
 
@@ -21,5 +21,5 @@ export function useBusinessSearch(price_level, cuisine, rating) {
         };
         fetchData();
     }, [searchParams]);
-    return [restaurants, amountResults, searchParams, setSearchParams];
+    return [restaurants, amountResults, searchParams, setSearchParams, setRestaurants];
 }
