@@ -10,6 +10,16 @@ function get_token_from_local_storage(){
   return localStorage.getItem('access_token');
 }
 
+export async function get_saved_favorite_lists(){
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'access_token': get_token_from_local_storage()
+    }
+  }
+  return fetch(`${API_BASE_URL}/favorite_lists`, requestOptions).then(response => response.json());
+}
+
 export async function get_my_favorite_list(){
     const requestOptions = {
       method: 'GET',

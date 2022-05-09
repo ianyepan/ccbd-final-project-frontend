@@ -1,58 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import styles from './SubNavItem.module.css';
+import { get_saved_favorite_lists} from '../../../hooks/yelp-api/api';
 
 export function SubNavItem(props) {
   const borderClass = props.showRightBorder ? styles['right-border'] : '';
   const [selectedFavList, setSelectedFavList] = useState();
+  const [favoriteListsOptions, setFavoriteListsOptions] = useState([""]);
 
   const handleSelectedFavListChange = (event) => {
     setSelectedFavList(event.target.value);
   };
 
-  function getFavListOptions() {
-    // TODO: get fav list from backend
-    const favListOptions = ["List1", "List2", "List3", "List4"]; // list name / list of rids
+  const getFavListOptions = async() => {
+    const favLists = await get_saved_favorite_lists();
 
-    // const favListOptions = [
-    //     { label: 'List1', value: ["asdfdsf"] }, { label: '$$', value: '$$' }, { label: '$$$', value: '$$$' }, { label: '$$$$', value: '$$$$' },
-    // ];
-
-    return favListOptions;
+    const output = Object.keys(favLists).map(email => email.split('@')[0]);
+    setFavoriteListsOptions(output)
   };
 
-  const favListOptions = getFavListOptions();
+  useEffect(() => {
+    getFavListOptions();
+  }, []);
+
 
   return (
-    // <div className="dropdown is-hoverable">
-    //   <div className="dropdown-trigger">
-    //     <div
-    //       className={`${styles['sub-nav-item']} ${borderClass}`}
-    //       aria-haspopup="true"
-    //       aria-controls="dropdown-menu4"
-    //     >
-    //       <span className="icon is-small">
-    //         <i className={`fas ${props.icon}`}></i>
-    //       </span>
-    //       <span>{props.label}</span>
-    //       <span className="icon is-small">
-    //         <i className="fas fa-angle-down" aria-hidden="true"></i>
-    //       </span>
-    //     </div>
-    //   </div>
       <Dropdown
         label="My Saved Favorite Lists"
-        options={favListOptions}
+        options={favoriteListsOptions}
         value={selectedFavList}
         onChange={setSelectedFavList}
       />
-    // </div>
   );
 }
 
 
+// options: ["ianyepan", "hanjuTsai", "fff..."]
 const Dropdown = ({ label, options, value, onChange }) => {
   return (
-
     <label>
       {label}
       <select value={value} onChange={onChange}>
@@ -62,7 +46,7 @@ const Dropdown = ({ label, options, value, onChange }) => {
       </select>
       {"  "}
     </label>
-
+  )
     // <div className="dropdown-menu" id="dropdown-menu4" role="menu">
     //   <div className="dropdown-content">
     //     {
@@ -75,5 +59,4 @@ const Dropdown = ({ label, options, value, onChange }) => {
     //     }
     //   </div>
     // </div>
-  )
 };
