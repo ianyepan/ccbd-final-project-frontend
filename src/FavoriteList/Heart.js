@@ -1,5 +1,6 @@
 import React from 'react';
-import Heart from "react-heart"
+// import Heart from "react-heart"
+import Heart from "react-animated-heart";
 import {useState} from 'react';
 import {add_restaurant_to_favorite_list, remove_restaurant_from_favorite_list} from  '../hooks/yelp-api/api'
  
@@ -17,9 +18,10 @@ export function MyHeart(props) {
     };
 
 	return (
-		<div style={{ width: "2rem", "margin-left": "25px"}}>
-			{/* <Heart isActive={active} onClick={() => setActive(!active)}/> */}
-			<Heart isActive={active} onClick={handleHeartClick}/>
+		// <div style={{ width: "2rem", "margin-left": "25px", "align":"right"}}>
+		<div style={{"margin-top":"-38px"}}>
+			{/* <Heart isActive={active} onClick={handleHeartClick}/> */}
+      <Heart isClick={active} onClick={handleHeartClick} />
 		</div>
 	);
 }

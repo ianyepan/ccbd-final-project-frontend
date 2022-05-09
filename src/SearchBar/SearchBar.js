@@ -29,10 +29,10 @@ export function SearchBar(props) {
 
     function submit(e) {
         if (price_level === "") {
-            price_level = "$$$$"
+            setPriceLevel("$$$$")
         }
         if (rating === "") {
-            rating = "0.0"
+            setRating("0.0")
         }
         if (typeof props.search === 'function') {
             props.search(price_level, cuisine, rating);

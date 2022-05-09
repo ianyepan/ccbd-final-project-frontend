@@ -34,6 +34,7 @@
     ]
   },
   "devDependencies": {
+    "react-animated-heart": "^0.0.7-alpha.1",
     "react-heart": "^1.0.6"
   }
 }

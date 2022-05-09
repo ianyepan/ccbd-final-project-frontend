@@ -5,6 +5,7 @@ import Rating from 'react-rating';
 export function BusinessRating(props) {
     return (
         <div className={styles.rating}>
+            <p>{props.rating.toFixed(1)}</p>
             <Rating
                 emptySymbol="far fa-star"
                 fullSymbol="fas fa-star"
