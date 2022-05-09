@@ -1,23 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './SearchBar.module.css';
 import { SearchSuggestions } from '../LandingPage/SearchSuggestions/SearchSuggestions';
-// import {create_favorite_list} from '../hooks/yelp-api/api';
 
 export function SearchBar(props) {
-    const [priceLevel, setPriceLevel] = useState("$$");
-    const [cuisine, setCuisine] = useState(props.term || '');
-    const [rating, setRating] = useState("4.0");
+    const { price_level, setPriceLevel, cuisine, setCuisine, rating, setRating } = props;
 
-    const priceLevelOptions = [
-        { label: '$', value: '$' }, { label: '$$', value: '$$' }, { label: '$$$', value: '$$$' }, { label: '$$$$', value: '$$$$' },
+    const price_levelOptions = [
+        { label: '$', value: '$' }, { label: '$$', value: '$$' }, 
+        { label: '$$$', value: '$$$' }, { label: '$$$$', value: '$$$$' },
     ];
 
     const ratingOptions = [
-        { label: '4.5', value: '4.5' }, { label: '4.0', value: '4.0' }, { label: '3.5', value: '3.5' }, { label: '3.0', value: '3.0' }, { label: '2.5', value: '2.5' },
+        { label: '4.5', value: '4.5' }, { label: '4.0', value: '4.0' }, 
+        { label: '3.5', value: '3.5' }, { label: '3.0', value: '3.0' }, { label: '2.5', value: '2.5' },
     ];
 
     const handlePriceLevelChange = (event) => {
         setPriceLevel(event.target.value);
+    };
+
+    const handleCuisineChange = (event) => {
+        setCuisine(event.target.value);
     };
 
     const handleRatingChange = (event) => {
@@ -25,11 +28,16 @@ export function SearchBar(props) {
     };
 
     function submit(e) {
-        console.log("Button pressed")
-        if (typeof props.search === 'function') {
-            props.search(priceLevel, cuisine, rating);
+        if (price_level === "") {
+            price_level = "$$$$"
         }
-        console.log(priceLevel, cuisine, rating);
+        if (rating === "") {
+            rating = "0.0"
+        }
+        if (typeof props.search === 'function') {
+            props.search(price_level, cuisine, rating);
+        }
+        console.log(price_level, cuisine, rating);
         e.preventDefault();
     }
 
@@ -44,7 +52,7 @@ export function SearchBar(props) {
                     </p>
                     <p className="control">
                         <input className={`input ${sizeClass} ${styles['input-control']}`}
-                            onChange={(e) => setCuisine(e.target.value)}
+                            onChange={handleCuisineChange}
                             type="text"
                             value={cuisine}
                             placeholder="vegetarian, vegan, "
@@ -58,8 +66,8 @@ export function SearchBar(props) {
             <div>
                 <Dropdown
                     label="Select Price Level: "
-                    options={priceLevelOptions}
-                    value={priceLevel}
+                    options={price_levelOptions}
+                    value={price_level}
                     onChange={handlePriceLevelChange}
                 />
                 <Dropdown
@@ -69,9 +77,6 @@ export function SearchBar(props) {
                     onChange={handleRatingChange}
                 />
             </div>
-            {/* <div> */}
-            {/* <button type="button" onClick={()=>{create_favorite_list(localStorage.getItem('access_token'))}} >Test API Button </button> */}
-            {/* </div> */}
         </>
     );
 }

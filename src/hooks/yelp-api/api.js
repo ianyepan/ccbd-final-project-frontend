@@ -51,6 +51,17 @@ export async function remove_restaurant_from_favorite_list(rid) {
   return fetch(`${API_BASE_URL}/favorite_list?rid=${rid}`, requestOptions);
 }
 
+export async function add_follow_list(fid){
+  console.log("inside add follow list")
+  const requestOptions = {
+    method: 'PUT',
+    headers: {
+      'access_token': get_token_from_local_storage()
+    }
+  }
+  return fetch(`${API_BASE_URL}/favorite_list/viewers?fid=${fid}`, requestOptions)
+}
+
 export async function get_access_token(auth_token){
   var details = {
     'grant_type': 'authorization_code',

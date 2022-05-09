@@ -12,6 +12,7 @@ export function SubNavItem(props) {
     let selectedList = event.target.value;
     setSelectedFavList(selectedList);
     props.setRestaurants(favoriteList[selectedList])
+    props.restorePriceAndRating()
   };
 
   const getFavListOptions = async() => {

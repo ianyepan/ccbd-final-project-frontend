@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavBar } from '../NavBar/NavBar';
 import { SubNav } from '../NavBar/SubNav/SubNav';
 import { SearchResultsSummary } from './SearchResultsSummary/SearchResultsSummary';
@@ -9,9 +9,16 @@ import {useBusinessSearch} from '../hooks/yelp-api/useBusinessSearch';
 export function Search() {
     const {location, history} = useReactRouter();
     const params = new URLSearchParams(location.search);
-    const price_level = params.get('price_level');
-    const cuisine = params.get('cuisine');
-    const rating = params.get('rating');
+
+    const [price_level, setPriceLevel] = useState(params.get("price_level") || "$$");
+    const [cuisine, setCuisine] = useState(params.get("cuisine") || '');
+    const [rating, setRating] = useState(params.get("rating") || "0.0");
+
+    function restorePriceAndRating() {
+      setRating("");
+      setCuisine("");
+      setPriceLevel("");
+    }
 
     const [restaurants, amountResults, searchParams, performSearch, setRestaurants] = useBusinessSearch(price_level, cuisine, rating);
 
@@ -29,10 +36,12 @@ export function Search() {
 
     return (
         <div>
-            <NavBar term={cuisine} location={rating} search={search_}/>
-            <SubNav setRestaurants={setRestaurants}/>
-            <SearchResultsSummary term={searchParams.cuisine}
-                                  location={searchParams.rating}
+            <NavBar  setPriceLevel={setPriceLevel} setCuisine={setCuisine} setRating={setRating}
+                    price_level={price_level} cuisine={cuisine} rating={rating} search={search_}/>
+            
+            <SubNav setRestaurants={setRestaurants} restorePriceAndRating={restorePriceAndRating}/>
+            <SearchResultsSummary cuisine={searchParams.cuisine}
+                                  rating={searchParams.rating}
                                   amountResults={amountResults}
                                   shownResults={restaurants ? restaurants.length : 0}
             />

@@ -20,11 +20,13 @@ const LogOutButton = withRouter(({ history }) => (
 ))
 
 export function NavBar(props) {
-    console.log("In NavBar")
+    const {price_level, setPriceLevel, cuisine, setCuisine, rating, setRating, search } = props;
+
     return (
         <div className={styles['nav-bar']}>
             <Link to='/'><img src={logo} className={styles.logo} alt='belb logo' /></Link>
-            <SearchBar small term={props.term} location={props.location} search={props.search}/>
+            <SearchBar setPriceLevel={setPriceLevel} setCuisine={setCuisine} setRating={setRating} 
+                       price_level={price_level} cuisine={cuisine} rating={rating} search={search}/>
             <LogOutButton/>
         </div>
     );

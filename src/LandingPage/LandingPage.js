@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { TopNav } from './TopNav/TopNav';
 import logo from '../assets/home-logo.png';
 import styles from './LandingPage.module.css';
@@ -11,6 +11,10 @@ import { get_access_token } from '../hooks/yelp-api/api';
 
 export function LandingPage() {
   const { location, history } = useReactRouter();
+
+  const [price_level, setPriceLevel] = useState("$$");
+  const [cuisine, setCuisine] = useState( '');
+  const [rating, setRating] = useState("0.0");
 
   function search(price_level, cuisine, rating) {
     const encodedPriceLevel = encodeURI(price_level);
@@ -40,7 +44,10 @@ export function LandingPage() {
       <div className={styles['search-area']}>
         <TopNav/>
         <img src={logo} className={styles.logo} alt="logo" />
-        <SearchBar search={search} />
+
+        {/* <SearchBar search={search} /> */}
+        <SearchBar setPriceLevel={setPriceLevel} setCuisine={setCuisine} setRating={setRating} 
+                    price_level={price_level} cuisine={cuisine} rating={rating} search={search}/>
       </div>
     </div>
   );
