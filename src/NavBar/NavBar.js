@@ -1,17 +1,17 @@
 import React from 'react';
-import logo from '../assets/logo.png';
+import logo from '../assets/search-logo.png';
 import styles from './NavBar.module.css';
 import { SearchBar } from '../SearchBar/SearchBar';
 import {Link} from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-
+// import { Redirect } from 'react-router-dom';
 
 const LogOutButton = withRouter(({ history }) => (
   <button
     type='button'
     className={`button ${styles['nav-button']}`}
     onClick={() => { 
-      history.push('/'); 
+      // history.push('/?code=275047eb-58f4-495d-923b-bcedc520dc89'); 
       localStorage.removeItem('access_token'); 
       localStorage.removeItem('refresh_token');
     }}

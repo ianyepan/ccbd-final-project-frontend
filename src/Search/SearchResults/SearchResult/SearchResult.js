@@ -23,10 +23,11 @@ export function SearchResult(props) {
             <div className={styles['contact-info']}>
                 {/* <p>{b.phone}</p> */}
                 {addressLines}
+                <br/>
             </div>
-            <br/>
+            {/* TODO: add a space between address and heart */}
             <div>
-              <MyHeart/>
+                <MyHeart rid={b.rid} is_active={props.is_in_favorite_list}/>
             </div>
         </div>
     )

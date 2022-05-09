@@ -7,10 +7,10 @@ export function SubNav() {
         <div className={styles.container}>
             <div className={styles['sub-nav']}>
                 <div>
-                    <SubNavItem label='Restaurant' icon='fa-utensils'/>
+                    {/* <SubNavItem label='Restaurant' icon='fa-utensils'/>
                     <SubNavItem label='Home Services' icon='fa-home'/>
-                    <SubNavItem label='Auto Services' icon='fa-car-side'/>
-                    <SubNavItem label='More' icon='fa-info-circle' showRightBorder/>
+                    <SubNavItem label='Auto Services' icon='fa-car-side'/> */}
+                    <SubNavItem label='My Saved Favorite Lists' icon='fa-info-circle' showRightBorder/>
                 </div>
                 <div>
                     <button className={`button ${styles['subnav-button']} ${styles['omit-right-border']}`}>

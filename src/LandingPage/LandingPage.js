@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMemo } from 'react'
 import { TopNav } from './TopNav/TopNav';
-import logo from '../assets/logo.png';
+import logo from '../assets/home-logo.png';
 import styles from './LandingPage.module.css';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { SearchSuggestions } from './SearchSuggestions/SearchSuggestions';
@@ -23,10 +23,15 @@ export function LandingPage() {
   useMemo(async () => {
     const urlParams = new URLSearchParams(window.location.search); // E.g. http://localhost:8888/?code=b0b7bc4b-31a9-4b93-b34c-d33f359acf30
     const code = urlParams.get('code'); // E.g. b0b7bc4b-31a9-4b93-b34c-d33f359acf30 (until string end)
+    if(!code)
+      return
     // exchange authorization token for access_token
-    let resp = await get_access_token(code); 
-    localStorage.setItem('access_token', resp.access_token);
-    localStorage.setItem('refresh_token', resp.refresh_token);
+    let resp = await get_access_token(code);
+    if(resp.access_token && resp.refresh_token){
+      localStorage.setItem('access_token', resp.access_token);
+      localStorage.setItem('refresh_token', resp.refresh_token);
+    }
+    // history.push('/');
   });
 
 

@@ -20,6 +20,7 @@ export function Search() {
       const encodedCusine = encodeURI(cuisine);
       const encodedRating = encodeURI(rating);
       performSearch({price_level, cuisine, rating});
+      history.push(`/search?price_level=${encodedPriceLevel}&cuisine=${encodedCusine}&rating=${encodedRating}`);   
     }
 
     // if (!price_level || !cuisine || !rating) {

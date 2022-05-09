@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './SearchBar.module.css';
 import { SearchSuggestions } from '../LandingPage/SearchSuggestions/SearchSuggestions';
-import {create_favorite_list} from '../hooks/yelp-api/api';
+// import {create_favorite_list} from '../hooks/yelp-api/api';
 
 export function SearchBar(props) {
     const [priceLevel, setPriceLevel] = useState("$$");
@@ -33,9 +33,6 @@ export function SearchBar(props) {
         e.preventDefault();
     }
 
-    function testapi(e) {
-
-    }
 
     const sizeClass = props.small ? '' : 'is-medium';
     return (
@@ -72,9 +69,9 @@ export function SearchBar(props) {
                     onChange={handleRatingChange}
                 />
             </div>
-            <div>
-            <button type="button" onClick={()=>{create_favorite_list(localStorage.getItem('access_token'))}} >Test API Button </button>
-            </div>
+            {/* <div> */}
+            {/* <button type="button" onClick={()=>{create_favorite_list(localStorage.getItem('access_token'))}} >Test API Button </button> */}
+            {/* </div> */}
         </>
     );
 }
