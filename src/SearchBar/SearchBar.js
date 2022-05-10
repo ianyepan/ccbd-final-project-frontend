@@ -65,27 +65,28 @@ export function SearchBar(props) {
             </form>
             <div>
                 <Dropdown
-                    label="Select Price Level: "
+                    label={""}
                     options={price_levelOptions}
-                    value={price_level}
                     onChange={handlePriceLevelChange}
+                    selectLabel={"select price"}
                 />
                 <Dropdown
-                    label="Select Rating: "
+                    label={""}
                     options={ratingOptions}
-                    value={rating}
                     onChange={handleRatingChange}
+                    selectLabel={"select rating"}
                 />
             </div>
         </>
     );
 }
 
-const Dropdown = ({ label, options, value, onChange }) => {
+const Dropdown = ({ label, options, value, onChange, selectLabel }) => {
     return (
         <label>
             {label}
-            <select value={value} onChange={onChange}>
+            <select value={value} onChange={onChange} style={{padding: "5px",  "border": "1px solid rgb(237,237,237)"}}>
+                <option value=" " disabled selected>{selectLabel}</option>  
                 {options.map((option) => (
                     <option value={option.value}>{option.label}</option>
                 ))}
