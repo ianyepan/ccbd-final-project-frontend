@@ -22,10 +22,6 @@ export function SearchResults(props) {
         console.log(rids);
     }, []);
 
-    
-    // useEffect(async() => {
-    //   setRids(await get_my_favorite_list_rids());
-    // }, [props.restaurants]);
 
     useEffect(() => {
       console.log("use effect")
@@ -36,21 +32,7 @@ export function SearchResults(props) {
     }, [props.restaurants])
 
 
-    if (props.restaurants)
-        console.log("restaurants length: ", props.restaurants.length);
-
-    // if (props.restaurants && props.restaurants.length) {
-    //     searchResults = props.restaurants.map(b => <SearchResult key={b.id} business={b} is_in_favorite_list={rids.includes(b.rid)} />);
-    //     return (
-    //         <div className={styles['search-results']}>
-    //             {searchResults}
-    //         </div>
-    //     );
-    // } else {
-    //     return <EmptyResults />
-    // }
-
-    if (props.restaurants) {
+    if (props.restaurants && props.restaurants.length) {
         searchResults = props.restaurants.map(b => <SearchResult key={b.id} business={b} rids={rids} />);
     }
     return (

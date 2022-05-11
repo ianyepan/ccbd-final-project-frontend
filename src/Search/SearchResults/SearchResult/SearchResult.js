@@ -42,7 +42,6 @@ const SearchBox = (props) => {
 
   
   const onClick = async () => {
-    console.log("onclicked")
     setResult(await get_healthy_ratio(props.rid))
     setShowResults(true)
   }
