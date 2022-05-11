@@ -69,12 +69,14 @@ export async function add_follow_list(fid){
   return fetch(`${API_BASE_URL}/favorite_list/viewers?fid=${fid}`, requestOptions)
 }
 
+// const suffixURL = '?client_id=28rtt451qusispi2q63ecb880h&response_type=code&scope=aws.cognito.signin.user.admin&redirect_uri=https://hanjutsai.live/'
+
 export async function get_access_token(auth_token){
   var details = {
     'grant_type': 'authorization_code',
     'client_id': '28rtt451qusispi2q63ecb880h',
     'code': auth_token,
-    'redirect_uri': 'http://localhost:8888'
+    'redirect_uri': 'https://hanjutsai.live/'
   };
   
   var formBody = [];

@@ -4,13 +4,7 @@ import { BusinessRating } from '../../../BusinessRating/BusinessRating';
 import {MyHeart} from '../../../FavoriteList/Heart';
 import { get_healthy_ratio } from '../../../hooks/yelp-api/api';
 export function SearchResult(props) {
-  
-    const [rids, setRids] = useState();
-    useEffect(() => {
-      // 👇️ move condition in hook
-      console.log("updating business!!!!");
 
-    }, [props.business]);
 
     const b = props.business;
     if (!b) {
@@ -53,7 +47,7 @@ const SearchBox = (props) => {
 
   return (
     <div>
-      <input type="submit" value="Search" onClick={onClick} />
+      <input type="submit" value="Score" onClick={onClick} />
       { showResults ? <Results result={result}/> : null }
     </div>
   )

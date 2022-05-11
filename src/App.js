@@ -5,7 +5,8 @@ import {Search} from './Search/Search';
 
 const baseURL = 'https://omegameal.auth.us-east-1.amazoncognito.com/'
 
-const suffixURL = '?client_id=28rtt451qusispi2q63ecb880h&response_type=code&scope=aws.cognito.signin.user.admin&redirect_uri=http://localhost:8888'
+const suffixURL = '?client_id=28rtt451qusispi2q63ecb880h&response_type=code&scope=aws.cognito.signin.user.admin&redirect_uri=https://hanjutsai.live/'
+
 function App() {
   return (
     <Switch>

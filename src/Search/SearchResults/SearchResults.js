@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { SearchResult } from './SearchResult/SearchResult';
 import styles from './SearchResults.module.css';
 import { Spinner } from '../../Spinner/Spinner.js';
-import {get_my_favorite_list} from '../../hooks/yelp-api/api'
+import {get, get_my_favorite_list} from '../../hooks/yelp-api/api'
 
 async function get_my_favorite_list_rids() {
     let restaurants = await get_my_favorite_list();
@@ -14,18 +14,27 @@ export function SearchResults(props) {
     let searchResults = <Spinner />;
     const [rids, setRids] = useState([]);
 
-    useMemo(async() => {
+    useMemo(() => {
         async function fetchRIDs() {
-            try {
-                setRids(await get_my_favorite_list_rids());
-            } catch (err) {
-                console.log(err);
-            }
+          setRids(await get_my_favorite_list_rids());
         }
         fetchRIDs();
+        console.log(rids);
     }, []);
 
-    console.log("restaurants: ", props.restaurants);
+    
+    // useEffect(async() => {
+    //   setRids(await get_my_favorite_list_rids());
+    // }, [props.restaurants]);
+
+    useEffect(() => {
+      console.log("use effect")
+      const fetchData = async () => {
+        setRids(await get_my_favorite_list());
+      }
+      fetchData();
+    }, [props.restaurants])
+
 
     if (props.restaurants)
         console.log("restaurants length: ", props.restaurants.length);

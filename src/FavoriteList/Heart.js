@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import Heart from "react-heart"
 import Heart from "react-animated-heart";
 import {useState} from 'react';
 import {add_restaurant_to_favorite_list, remove_restaurant_from_favorite_list} from  '../hooks/yelp-api/api'
  
 export function MyHeart(props) {
-    const [active, setActive] = useState(props.rids.includes(props.rid))
+    const [active, setActive] = useState(props.rids.map(b => b.rid).includes(props.rid))
+
+    useEffect(() => {
+      console.log(props.rids, props.rid);
+      setActive(props.rids.map(b => b.rid).includes(props.rid))
+    }, [props.rids]);
 
     const handleHeartClick = (event) => {
       console.log('get_rid: ', props.rid)
