@@ -4,8 +4,6 @@ import { BusinessRating } from '../../../BusinessRating/BusinessRating';
 import {MyHeart} from '../../../FavoriteList/Heart';
 import { get_healthy_ratio } from '../../../hooks/yelp-api/api';
 export function SearchResult(props) {
-
-
     const b = props.business;
     if (!b) {
         return (<div/>);
@@ -37,6 +35,10 @@ export function SearchResult(props) {
 const SearchBox = (props) => {
   const [showResults, setShowResults] = React.useState(false)
   const [result, setResult] = React.useState("");
+
+  useEffect(()=> {
+    setResult("")
+  }, props.rid)
 
   
   const onClick = async () => {
