@@ -37,7 +37,7 @@ export function LandingPage() {
     }
     // history.push('/');
   });
-
+  
 
   return (
     <div className={styles.landing}>

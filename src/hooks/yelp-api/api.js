@@ -20,6 +20,13 @@ export async function get_saved_favorite_lists(){
   return fetch(`${API_BASE_URL}/favorite_lists`, requestOptions).then(response => response.json());
 }
 
+export async function get_healthy_ratio(rid){
+  const requestOptions = {
+    method: 'GET',
+  }
+  return fetch(`${API_BASE_URL}/health?rid=${rid}`, requestOptions).then(response => response.json())
+}
+
 export async function get_my_favorite_list(){
     const requestOptions = {
       method: 'GET',

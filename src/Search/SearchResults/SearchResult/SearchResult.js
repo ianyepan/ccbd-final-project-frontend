@@ -1,9 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './SearchResult.module.css';
 import { BusinessRating } from '../../../BusinessRating/BusinessRating';
 import {MyHeart} from '../../../FavoriteList/Heart';
-
+import { get_healthy_ratio } from '../../../hooks/yelp-api/api';
 export function SearchResult(props) {
+  
+    const [rids, setRids] = useState();
+    useEffect(() => {
+      // 👇️ move condition in hook
+      console.log("updating business!!!!");
+
+    }, [props.business]);
+
     const b = props.business;
     if (!b) {
         return (<div/>);
@@ -11,6 +19,7 @@ export function SearchResult(props) {
 
     const tags = b.categories.map(category => (<span className={`tag ${styles['business-tag']}`} key={b.id + category.title}>{category.title}</span>));
     const addressLines = b.address;
+
 
     return (
         <div className={styles['search-result']}>
@@ -24,8 +33,56 @@ export function SearchResult(props) {
                 {addressLines}
             </div>
             <div style={{"align": "right"}}>
-                <MyHeart rid={b.rid} is_active={props.is_in_favorite_list} />
+                <MyHeart rid={b.rid} rids={props.rids} />
             </div>
+            <SearchBox rid={b.rid}></SearchBox>
         </div>
     )
 }
+
+const SearchBox = (props) => {
+  const [showResults, setShowResults] = React.useState(false)
+  const [result, setResult] = React.useState("");
+
+  
+  const onClick = async () => {
+    console.log("onclicked")
+    setResult(await get_healthy_ratio(props.rid))
+    setShowResults(true)
+  }
+
+  return (
+    <div>
+      <input type="submit" value="Search" onClick={onClick} />
+      { showResults ? <Results result={result}/> : null }
+    </div>
+  )
+}
+
+const Results = (props) => (
+  <div id="results" className="search-results">
+    {props.result}
+  </div>
+)
+
+// function myFunction(rid) {
+//   console.log(rid);
+//   var x = document.getElementById(rid);
+//   console.log("xxx",x)
+//   if (x.style.display) {
+//     x.style.display = "block";
+//   } else {
+//     x.style.display = "none";
+//   }
+// }
+
+// export function MyButton(props){
+//   return (
+//     <div>
+//     <button onclick={myFunction(props.rid)}>Click Me</button>
+//     <div id={props.rid} style={{"width": 100}}>
+//     This is my DIV element.
+//     </div>
+//     </div>
+// )
+// }

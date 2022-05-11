@@ -22,3 +22,10 @@
 :global(.tag).business-tag {
   margin-right: 4px;
 }
+
+.hide{
+  display:none;
+}
+.show{
+  display:block;
+}

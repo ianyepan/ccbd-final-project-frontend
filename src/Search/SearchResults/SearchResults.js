@@ -42,7 +42,7 @@ export function SearchResults(props) {
     // }
 
     if (props.restaurants) {
-        searchResults = props.restaurants.map(b => <SearchResult key={b.id} business={b} is_in_favorite_list={rids.includes(b.rid)} />);
+        searchResults = props.restaurants.map(b => <SearchResult key={b.id} business={b} rids={rids} />);
     }
     return (
         <div className={styles['search-results']}>
